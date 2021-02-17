@@ -14,22 +14,37 @@ include_once 'includes/message.php';
           <th>Sobrenome</th>
           <th>Email</th>
           <th>Idade</th>
-          <th>Ações</th>
         </tr>
       </thead>
 
       <tbody>
         <?php
-          while($dados = mysqli_fetch_array($lista_clientes)) { ?>
-            <tr>
-              <td><?php echo $dados['nome'] ?></td>
-              <td><?php echo $dados['sobrenome'] ?></td>
-              <td><?php echo $dados['email'] ?></td>
-              <td><?php echo $dados['idade'] ?></td>
-              <td><a href="" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
-              <td><a href="actions/delete.php" class="btn-floating red"><i class="material-icons">delete</i></a></td>
-            </tr>
-          <?php }; ?>
+        while ($dados = mysqli_fetch_array($lista_clientes)) { ?>
+          <tr>
+            <td><?php echo $dados['nome'] ?></td>
+            <td><?php echo $dados['sobrenome'] ?></td>
+            <td><?php echo $dados['email'] ?></td>
+            <td><?php echo $dados['idade'] ?></td>
+            <td><a href="editar.php?id=<?php echo $dados['id']; ?>" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
+            <td><a href="#modal<?php echo $dados['id']; ?>" class="btn-floating red modal-trigger"><i class="material-icons">delete</i></a></td>
+          </tr>
+
+          <!-- Modal -->
+          <div id="modal<?php echo $dados['id']; ?>" class="modal">
+            <div class="modal-content">
+              <h4>Tem certeza que deseja deletar?</h4>
+            </div>
+            <div class="modal-footer">
+
+              <form action="actions/delete.php" method="POST">
+                <input type="hidden" name="id" value="<?php echo $dados['id']; ?>">
+                <button type="submit" name="btn-deletar" class="btn red">Deletar</button>
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+              </form>
+
+            </div>
+          </div>
+        <?php }; ?>
       </tbody>
     </table>
     <div>
