@@ -1,5 +1,7 @@
 <?php
-include_once 'includes/header.php'
+include_once 'actions/listar_clientes.php';
+include_once 'includes/header.php';
+include_once 'includes/message.php';
 ?>
 
 <div class="row">
@@ -17,14 +19,17 @@ include_once 'includes/header.php'
       </thead>
 
       <tbody>
-        <tr>
-          <td>José Renato</td>
-          <td>Gualberto</td>
-          <td>renatogual@hotmail.com</td>
-          <td>26</td>
-          <td><a href="" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
-          <td><a href="" class="btn-floating red"><i class="material-icons">delete</i></a></td>
-        </tr>
+        <?php
+          while($dados = mysqli_fetch_array($lista_clientes)) { ?>
+            <tr>
+              <td><?php echo $dados['nome'] ?></td>
+              <td><?php echo $dados['sobrenome'] ?></td>
+              <td><?php echo $dados['email'] ?></td>
+              <td><?php echo $dados['idade'] ?></td>
+              <td><a href="" class="btn-floating orange"><i class="material-icons">edit</i></a></td>
+              <td><a href="actions/delete.php" class="btn-floating red"><i class="material-icons">delete</i></a></td>
+            </tr>
+          <?php }; ?>
       </tbody>
     </table>
     <div>
