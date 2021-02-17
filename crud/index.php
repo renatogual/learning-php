@@ -28,7 +28,7 @@ include_once 'includes/header.php'
       </tbody>
     </table>
     <div>
-      <a href="" class="btn">Adicionar cliente</a>
+      <a href="adicionar.php" class="btn">Adicionar cliente</a>
     </div>
   </div>
 </div>
